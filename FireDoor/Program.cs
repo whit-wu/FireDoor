@@ -41,16 +41,17 @@ namespace FireDoor {
                         if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature && computer.Hardware[i].Sensors[j].Name.ToLower().Contains("core"))
                         {
                             Console.WriteLine(computer.Hardware[i].Sensors[j].Name + ":" + coreTemp.ToString() + "\r");
-                            if (coreTemp > 20)
+                            if (coreTemp > 50)
                             {
                                 Console.WriteLine($"Core temp reached {Convert.ToInt32(coreTemp)}.  Max temp allowed is 80.");
                                 return true;
                             }
                             Console.WriteLine();
-                            return false;
+                            
                         }
-                           
+                        
                     }
+                    return false;
                 }
             }
             computer.Close();
@@ -60,7 +61,7 @@ namespace FireDoor {
         static void KillOCTestApp()
         {
             Console.WriteLine("Killing process");
-            foreach (var process in Process.GetProcessesByName("chrome"))
+            foreach (var process in Process.GetProcessesByName("witcher3"))
             {
                 process.Kill();
             }
