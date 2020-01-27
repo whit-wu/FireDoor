@@ -1,10 +1,16 @@
 {
   "testApps": [
     {
-
+      "Witcher3": {
+        "AppName": "The Witcher 3: Wild Hunt",
+        "ProcessName":  "witcher3"
+      }
     },
     {
-
+      "Doom": {
+        "AppName": "Doom",
+        "ProcessName":  "doom"
+      }
     }
   ] 
 }
