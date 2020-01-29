@@ -14,9 +14,15 @@ namespace FireDoor {
 
         static void Main(string[] args)
         {
+            //TODO: Make project of unit tests so we don't need to 
+            // have this junk in the main method.
+            
+            TestAppService test = new TestAppService();
+            test.GetTestApps();
+
             CpuTempService cpuTempService = new CpuTempService();
             cpuTempService.MeasureTemperature();
-            
+
         }
     }
 }
