@@ -18,7 +18,7 @@ namespace FireDoor {
             // have this junk in the main method.
             
             TestAppService test = new TestAppService();
-            test.GetTestApps();
+            Process appToTest = test.GetTestApp();
 
             CpuTempService cpuTempService = new CpuTempService();
             cpuTempService.MeasureTemperature();

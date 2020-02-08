@@ -1,6 +1,7 @@
 ﻿using FireDoor.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,11 @@ namespace FireDoor.Services
 {
     public class TestAppService
     {
-        private List<TestApp> testApps;
+        private string _testApp;
+
+        private bool _validPath = false;
+
+        private Process _proc;
 
         public TestAppService()
         {
@@ -18,28 +23,24 @@ namespace FireDoor.Services
         }
 
 
-        /// <summary>
-        /// Looks for GOG and Steam directories on C for .exe files
-        /// and saves them to a text file.
-        /// Optioal paramter exists so user can input a custom path.
-        /// If exe found in custom path, let user enter path.
-        /// Inform user that any GOG and Steam apps installed in
-        /// custom path will need to use the custom path flag.
-        /// </summary>
-        /// <returns>List<TestApp></returns>
-        public List<TestApp> GetTestApps(bool isCustomPath = false, string customPath = null)
+        public Process GetTestApp()
         {
-           
+            while (!_validPath)
+            {
+                Console.WriteLine("Please enter the full path to the exe you wish to run for testing (with exe file included).");
+                _testApp = Console.ReadLine();
 
-            string steamApps = @"C:\Program Files (x86)\Steam\steamapps\common";
-
-            List<string> files = Directory.GetFiles(steamApps, "*.exe",
-                                    SearchOption.AllDirectories).ToList();
-
-
-            //TODO: Look through GOG dirs.  Also, check if isCustomPath is true.
-            //  If it is, look at user provided path.  Save all entries to txt file.
-            return testApps;
+                if (_testApp.ToLower().Contains(".exe") && File.Exists(_testApp))
+                {
+                    _proc = System.Diagnostics.Process.Start(_testApp);
+                    _validPath = true;
+                }
+                else
+                {
+                    Console.WriteLine("Entry is not a valid path or does not specify exe.  Please verify your path and try again.");
+                }
+            }
+            return _proc;
         }
     }
 }
