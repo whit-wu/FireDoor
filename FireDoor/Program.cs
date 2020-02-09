@@ -20,8 +20,14 @@ namespace FireDoor {
             TestAppService test = new TestAppService();
             Process appToTest = test.GetTestApp();
 
-            CpuTempService cpuTempService = new CpuTempService();
-            cpuTempService.MeasureTemperature();
+            CpuTempService cpuTempService = new CpuTempService(appToTest);
+            bool running = cpuTempService.MeasureTemperature();
+
+            if (!running)
+            {
+                Console.Clear();
+                Console.WriteLine("Testing ended");
+            }
 
         }
     }

@@ -11,27 +11,31 @@ namespace FireDoor.Services
 {
     public class CpuTempService
     {
-        public CpuTempService()
-        {
 
+        public CpuTempService(Process proc)
+        {
+            this._proc = proc;
         }
 
-        public CpuTempService(TestApp testApp)
-        {
 
-        }
-
-        private TestApp _testApp;
-
+        private Process _proc;
         
-        public void MeasureTemperature()
+        // TODO: instead of returning bool, return tuple with last temps and reason
+        // for termination
+        public bool MeasureTemperature()
         {
             while (!IsCPUTooHot())
             {
+                Process[] pname = Process.GetProcessesByName(_proc.ProcessName);
+                if (pname.Length == 0)
+                {
+                    return false;
+                }
                 System.Threading.Thread.Sleep(10000);
                 Console.Clear();
             }
             KillOCTestApp();
+            return false;
         }
         
         private bool IsCPUTooHot()
@@ -70,10 +74,7 @@ namespace FireDoor.Services
         public void KillOCTestApp()
         {
             Console.WriteLine("Killing process");
-            foreach (var process in Process.GetProcessesByName("chrome"))
-            {
-                process.Kill();
-            }
+            _proc.Kill();
             Console.WriteLine("Test complete");
             Console.ReadLine();
         }
