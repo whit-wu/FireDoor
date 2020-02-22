@@ -11,14 +11,12 @@ namespace FireDoor.Services
 {
     public class CpuTempService
     {
+        private readonly Process _proc;
 
         public CpuTempService(Process proc)
         {
             this._proc = proc;
         }
-
-
-        private Process _proc;
         
         // TODO: instead of returning bool, return tuple with last temps and reason
         // for termination
