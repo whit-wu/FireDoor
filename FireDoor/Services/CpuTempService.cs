@@ -13,27 +13,31 @@ namespace FireDoor.Services
     {
         private readonly Process _proc;
 
+        private int _coreTemp;
+
+
+        private string _coreName;
+
         public CpuTempService(Process proc)
         {
             this._proc = proc;
         }
         
-        // TODO: instead of returning bool, return tuple with last temps and reason
-        // for termination
-        public bool MeasureTemperature()
+        public (string, string, int) MeasureTemperature()
         {
+            
             while (!IsCPUTooHot())
             {
                 Process[] pname = Process.GetProcessesByName(_proc.ProcessName);
                 if (pname.Length == 0)
                 {
-                    return false;
+                    return ("Process terminated by user", null, 0);
                 }
                 System.Threading.Thread.Sleep(10000);
                 Console.Clear();
             }
             KillOCTestApp();
-            return false;
+            return ("Core temp reached max threshold", _coreName, _coreTemp);
         }
         
         private bool IsCPUTooHot()
@@ -53,9 +57,11 @@ namespace FireDoor.Services
                         if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature && computer.Hardware[i].Sensors[j].Name.ToLower().Contains("core"))
                         {
                             Console.WriteLine(computer.Hardware[i].Sensors[j].Name + ":" + coreTemp.ToString() + "\r");
-                            if (coreTemp > 60)
+                            if (coreTemp > 10)
                             {
-                                Console.WriteLine($"Core temp reached {Convert.ToInt32(coreTemp)}.  Max temp allowed is 80.");
+                                Console.WriteLine($"Core temp reached {Convert.ToInt32(coreTemp)}.  Max temp allowed is 60.");
+                                _coreTemp = Convert.ToInt32(coreTemp);
+                                _coreName = computer.Hardware[i].Sensors[j].Name;
                                 return true;
                             }
                             Console.WriteLine();
@@ -71,10 +77,7 @@ namespace FireDoor.Services
 
         public void KillOCTestApp()
         {
-            Console.WriteLine("Killing process");
             _proc.Kill();
-            Console.WriteLine("Test complete");
-            Console.ReadLine();
         }
     }
 }
