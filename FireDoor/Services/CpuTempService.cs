@@ -56,8 +56,7 @@ namespace FireDoor.Services
                         var coreTemp = computer.Hardware[i].Sensors[j].Value;
                         if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature && computer.Hardware[i].Sensors[j].Name.ToLower().Contains("core"))
                         {
-                            Console.WriteLine(computer.Hardware[i].Sensors[j].Name + ":" + coreTemp.ToString() + "\r");
-                            if (coreTemp > 10)
+                            if (coreTemp > 60)
                             {
                                 Console.WriteLine($"Core temp reached {Convert.ToInt32(coreTemp)}.  Max temp allowed is 60.");
                                 _coreTemp = Convert.ToInt32(coreTemp);
@@ -66,7 +65,6 @@ namespace FireDoor.Services
                             }
                             Console.WriteLine();
                         }
-
                     }
                     return false;
                 }

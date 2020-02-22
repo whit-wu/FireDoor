@@ -22,7 +22,6 @@ namespace FireDoor.Services
 
         }
 
-
         public Process GetTestApp()
         {
             while (!_validPath)
