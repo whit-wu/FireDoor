@@ -17,6 +17,8 @@ namespace FireDoor.Services
 
         private Process _proc;
 
+        private readonly string[] _launchers = { "gog", "steam", "epic", "uplay" };
+
         public TestAppService()
         {
 
@@ -31,6 +33,19 @@ namespace FireDoor.Services
 
                 if (_testApp.ToLower().Contains(".exe") && File.Exists(_testApp))
                 {
+                    bool hasLauncher = Array.Exists(_launchers, element => _testApp.ToLower().Contains(element.ToLower()));
+                    
+                    if (hasLauncher)
+                    {
+                        //TODO: See if we can't force the launcher to start
+                        // and check if it is running.
+                        Console.Clear();
+                        Console.WriteLine("It appears the game you wish to test requires a launcher to startup before running.");
+                        Console.WriteLine("Firedoor needs the test app to run before it can read your CPU temp.");
+                        Console.WriteLine("To do this, your launcher must be running first.");
+                        Console.WriteLine("Please sign into or startup your lancher now, then press enter once it is running.");
+                        Console.ReadLine();
+                    }
                     _proc = System.Diagnostics.Process.Start(_testApp);
                     _validPath = true;
                 }
