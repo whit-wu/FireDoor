@@ -15,14 +15,17 @@ namespace FireDoor.Services
 
         private int _coreTemp;
 
+        private int _maxTemp;
 
         private string _coreName;
 
-        public CpuTempService(Process proc)
+        public CpuTempService(Process proc, int maxTemp = 60)
         {
             this._proc = proc;
+            this._maxTemp = maxTemp;
         }
         
+       //TODO:Warn users if their max temp is higher than what is reccomended
         public (string, string, int) MeasureTemperature()
         {
             
@@ -56,7 +59,7 @@ namespace FireDoor.Services
                         var coreTemp = computer.Hardware[i].Sensors[j].Value;
                         if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature && computer.Hardware[i].Sensors[j].Name.ToLower().Contains("core"))
                         {
-                            if (coreTemp > 60)
+                            if (coreTemp > _maxTemp)
                             {
                                 Console.WriteLine($"Core temp reached {Convert.ToInt32(coreTemp)}.  Max temp allowed is 60.");
                                 _coreTemp = Convert.ToInt32(coreTemp);
