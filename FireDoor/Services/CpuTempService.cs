@@ -21,14 +21,25 @@ namespace FireDoor.Services
 
         public CpuTempService(Process proc, int maxTemp = 60)
         {
-            this._proc = proc;
-            this._maxTemp = maxTemp;
+            _proc = proc;
+            _maxTemp = maxTemp;
         }
         
-       //TODO:Warn users if their max temp is higher than what is reccomended
         public (string, string, int) MeasureTemperature()
         {
-            
+            //// Max temp is going to vary by make and model, 
+            //// so for the sake of keeping things safe we are
+            //// going to assume that 80 C is too much.
+
+            //if (_maxTemp > 80)
+            //{
+            //    Console.WriteLine("Max temprature is greater than reccomended amount of 80 degrees C.");
+            //    Console.WriteLine("Please understand that we are not responsible for damaged hardware.");
+            //    Console.WriteLine("If you understand these risks, please press any key to continue.");
+            //    Console.WriteLine("Otherwise hit the X in the upper-right hand corner to quit the program.");
+            //    Console.ReadLine();
+            //}
+
             while (!IsCPUTooHot())
             {
                 Process[] pname = Process.GetProcessesByName(_proc.ProcessName);
