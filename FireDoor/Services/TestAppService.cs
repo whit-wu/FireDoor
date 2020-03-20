@@ -46,7 +46,18 @@ namespace FireDoor.Services
                         Console.WriteLine("Please sign into or startup your lancher now, then press enter once it is running.");
                         Console.ReadLine();
                     }
-                    _proc = System.Diagnostics.Process.Start(_testApp);
+
+                    ProcessStartInfo processInfo = new ProcessStartInfo();
+
+                    processInfo.FileName = _testApp;
+                    processInfo.ErrorDialog = true;
+                    processInfo.UseShellExecute = false;
+                    processInfo.RedirectStandardOutput = true;
+                    processInfo.RedirectStandardError = true;
+                    processInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(_testApp);
+
+                    _proc = Process.Start(processInfo);
+
                     _validPath = true;
                 }
                 else
