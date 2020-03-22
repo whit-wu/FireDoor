@@ -16,13 +16,8 @@ namespace FireDoor {
             TestAppService test = new TestAppService();
             int tempToPass = PromptForMaxTemp();
             Process appToTest = test.GetTestApp();
-
-            
-
             CpuTempService cpuTempService = new CpuTempService(appToTest, tempToPass);
-
             (string, string, int) results = cpuTempService.MeasureTemperature();
-
             Console.Clear();
             Console.WriteLine($"Termination result: {results.Item1}.");
 
@@ -62,20 +57,15 @@ namespace FireDoor {
                 ConsoleKey response = ConsoleKey.UpArrow;
                 if (n > 60)
                 {
-
                     do
                     {
-
                         Console.WriteLine($"Inputted temp {n.ToString()} C greater than reccomended temp of 60 C?");
                         Console.Write("Are you sure you wish to move forward with testing at this temp? [y/n] ");
                         response = Console.ReadKey(false).Key;   // true is intercept key (dont show), false is show
                         if (response != ConsoleKey.Enter)
                             Console.WriteLine();
-
-
-
-                    } while (response != ConsoleKey.Y && response != ConsoleKey.N);
-
+                    } 
+                    while (response != ConsoleKey.Y && response != ConsoleKey.N);
 
                     if (response == ConsoleKey.N)
                     {
@@ -92,7 +82,6 @@ namespace FireDoor {
             } while (!confirmed);
             Console.ReadLine();
             return 0;
-
         }
     }
 }
