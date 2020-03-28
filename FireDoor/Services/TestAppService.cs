@@ -15,8 +15,6 @@ namespace FireDoor.Services
 
         private bool _validPath = false;
 
-        private Process _proc;
-
         private readonly string[] _launchers = { "gog", "steam", "epic", "uplay" };
 
         public TestAppService()
@@ -24,8 +22,9 @@ namespace FireDoor.Services
 
         }
 
-        public Process GetTestApp()
+        public ProcessStartInfo GetTestApp()
         {
+            ProcessStartInfo processInfo = new ProcessStartInfo(); ;
             while (!_validPath)
             {
                 Console.WriteLine("Please enter the full path to the exe you wish to run for testing (with exe file included).");
@@ -47,16 +46,12 @@ namespace FireDoor.Services
                         Console.ReadLine();
                     }
 
-                    ProcessStartInfo processInfo = new ProcessStartInfo();
-
                     processInfo.FileName = _testApp;
                     processInfo.ErrorDialog = true;
                     processInfo.UseShellExecute = false;
                     processInfo.RedirectStandardOutput = true;
                     processInfo.RedirectStandardError = true;
                     processInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(_testApp);
-
-                    _proc = Process.Start(processInfo);
 
                     _validPath = true;
                 }
@@ -65,7 +60,7 @@ namespace FireDoor.Services
                     Console.WriteLine("Entry is not a valid path or does not specify exe.  Please verify your path and try again.");
                 }
             }
-            return _proc;
+            return processInfo;
         }
     }
 }

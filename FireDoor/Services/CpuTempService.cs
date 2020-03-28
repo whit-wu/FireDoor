@@ -19,9 +19,9 @@ namespace FireDoor.Services
 
         private string _coreName;
 
-        public CpuTempService(Process proc, int maxTemp = 60)
+        public CpuTempService(ProcessStartInfo appToTest, int maxTemp = 60)
         {
-            _proc = proc;
+            _proc = Process.Start(appToTest);
             _maxTemp = maxTemp;
         }
         

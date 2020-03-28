@@ -15,7 +15,7 @@ namespace FireDoor {
         {
             TestAppService test = new TestAppService();
             int tempToPass = PromptForMaxTemp();
-            Process appToTest = test.GetTestApp();
+            ProcessStartInfo appToTest = test.GetTestApp();
             CpuTempService cpuTempService = new CpuTempService(appToTest, tempToPass);
             (string, string, int) results = cpuTempService.MeasureTemperature();
             Console.Clear();
