@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -7,12 +8,25 @@ namespace FireDoor.Services
     public class ReportWriterService
     {
 
+
+        private string AppDirectory;
+        
+        public ReportWriterService()
+        {
+            Environment.CurrentDirectory = "../..";
+            AppDirectory = Environment.CurrentDirectory;
+
+        }
+        
         // method to write data to csv
         public void WriteTempData(List<int> coreTemps)
         {
 
-            string coreTempFile = "c:/test1.csv";
+            string coreTempFile =  Path.Combine(AppDirectory, "coreTemplist.csv");
+            
 
+            
+            Console.WriteLine(coreTempFile);
             if (!File.Exists(coreTempFile))
             {
                 File.WriteAllText(coreTempFile, string.Join(",", coreTemps));
@@ -31,5 +45,7 @@ namespace FireDoor.Services
 
         // method to write final report that shows average temp
         // and time that testapp ran before terminating
+
+        // method to delete coreTempList.csv when program is done running
     }
 }
