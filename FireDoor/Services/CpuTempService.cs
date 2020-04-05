@@ -15,9 +15,13 @@ namespace FireDoor.Services
 
         private int _coreTemp;
 
+        private List<int> _coreTemps = new List<int>();
+
         private int _maxTemp;
 
         private string _coreName;
+
+        private ReportWriterService writerService = new ReportWriterService();
 
         public CpuTempService(ProcessStartInfo appToTest, int maxTemp = 60)
         {
@@ -34,8 +38,9 @@ namespace FireDoor.Services
                 {
                     return ("Process terminated by user", null, 0);
                 }
+                Console.WriteLine("----");
                 System.Threading.Thread.Sleep(10000);
-                Console.Clear();
+                //Console.Clear();
             }
             KillOCTestApp();
             return ("Core temp reached max threshold", _coreName, _coreTemp);
@@ -57,16 +62,21 @@ namespace FireDoor.Services
                         var coreTemp = computer.Hardware[i].Sensors[j].Value;
                         if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature && computer.Hardware[i].Sensors[j].Name.ToLower().Contains("core"))
                         {
-                            if (coreTemp > _maxTemp)
+                            _coreTemp = Convert.ToInt32(coreTemp);
+                            _coreName = computer.Hardware[i].Sensors[j].Name;
+                            _coreTemps.Add(_coreTemp);
+
+                            Console.Write(_coreTemp);
+                            if (_coreTemp > _maxTemp)
                             {
                                 Console.WriteLine($"Core temp reached {Convert.ToInt32(coreTemp)}.  Max temp allowed is 60.");
-                                _coreTemp = Convert.ToInt32(coreTemp);
-                                _coreName = computer.Hardware[i].Sensors[j].Name;
                                 return true;
                             }
                             Console.WriteLine();
                         }
                     }
+                    writerService.WriteTempData(_coreTemps);
+                    _coreTemps.Clear();
                     return false;
                 }
             }

@@ -18,7 +18,7 @@ namespace FireDoor {
             ProcessStartInfo appToTest = test.GetTestApp();
             CpuTempService cpuTempService = new CpuTempService(appToTest, tempToPass);
             (string, string, int) results = cpuTempService.MeasureTemperature();
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine($"Termination result: {results.Item1}.");
 
             if(results.Item2 != null)
