@@ -7,24 +7,23 @@ namespace FireDoor.Services
 {
     public class ReportWriterService
     {
-
-
-        private string AppDirectory;
+        private string _appDirectory;
         
+        // The constructor is used to change our directory 
+        // to the home directory of the project.  This is
+        // where coreTempList.csv will live.  If the directory
+        // is not changed, we would have to specfiy a full 
+        // qualifed path.  
         public ReportWriterService()
         {
             Environment.CurrentDirectory = "../..";
-            AppDirectory = Environment.CurrentDirectory;
-
+            _appDirectory = Environment.CurrentDirectory;
         }
         
         // method to write data to csv
         public void WriteTempData(List<int> coreTemps)
         {
-
-            string coreTempFile =  Path.Combine(AppDirectory, "coreTemplist.csv");
-            
-
+            string coreTempFile =  Path.Combine(_appDirectory, "coreTempList.csv");
             
             Console.WriteLine(coreTempFile);
             if (!File.Exists(coreTempFile))
