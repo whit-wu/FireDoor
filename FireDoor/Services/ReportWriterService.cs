@@ -8,6 +8,7 @@ namespace FireDoor.Services
     public class ReportWriterService
     {
         private string _appDirectory;
+        private string _currentDateTime;
         
         // The constructor is used to change our directory 
         // to the home directory of the project.  This is
@@ -18,12 +19,13 @@ namespace FireDoor.Services
         {
             Environment.CurrentDirectory = "../..";
             _appDirectory = Environment.CurrentDirectory;
+            _currentDateTime = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
         }
         
         // method to write data to csv
         public void WriteTempData(List<int> coreTemps)
         {
-            string coreTempFile =  Path.Combine(_appDirectory, "coreTempList.csv");
+            string coreTempFile =  Path.Combine(_appDirectory, $"coreTempList_{_currentDateTime}.csv");
             
             Console.WriteLine(coreTempFile);
             if (!File.Exists(coreTempFile))
@@ -40,11 +42,20 @@ namespace FireDoor.Services
 
         // method to read data from csv
 
-        // method to calculate average temp
+        // method to calculate average temp for each core
+        private decimal CalcAvgTempOfEachCore(int[] coreTemps)
+        {
+            int sumOfTemps = coreTemps.Sum();
+
+            decimal avgTempForCore = (decimal)sumOfTemps / coreTemps.Length;
+
+            return avgTempForCore;
+        }
 
         // method to write final report that shows average temp
-        // and time that testapp ran before terminating
+        // and time that testapp ran before terminating.
+        // should take in the time the program ran before 
+        // being terminated.
 
-        // method to delete coreTempList.csv when program is done running
     }
 }
