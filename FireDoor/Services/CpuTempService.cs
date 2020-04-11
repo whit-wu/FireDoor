@@ -13,7 +13,7 @@ namespace FireDoor.Services
     {
         private readonly Process _proc;
 
-        private int _coreTemp;
+        private int _coreTempInt;
 
         private List<int> _coreTemps = new List<int>();
 
@@ -40,10 +40,9 @@ namespace FireDoor.Services
                 }
                 Console.WriteLine("----");
                 System.Threading.Thread.Sleep(10000);
-                //Console.Clear();
             }
             KillOCTestApp();
-            return ("Core temp reached max threshold", _coreName, _coreTemp);
+            return ("Core temp reached max threshold", _coreName, _coreTempInt);
         }
         
         private bool IsCPUTooHot()
@@ -59,17 +58,17 @@ namespace FireDoor.Services
                 {
                     for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
                     {
-                        var coreTemp = computer.Hardware[i].Sensors[j].Value;
+                        var _coreTemp = computer.Hardware[i].Sensors[j].Value;
                         if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature && computer.Hardware[i].Sensors[j].Name.ToLower().Contains("core"))
                         {
-                            _coreTemp = Convert.ToInt32(coreTemp);
+                            _coreTempInt = Convert.ToInt32(_coreTemp);
                             _coreName = computer.Hardware[i].Sensors[j].Name;
-                            _coreTemps.Add(_coreTemp);
+                            _coreTemps.Add(_coreTempInt);
 
                             Console.Write(_coreTemp);
                             if (_coreTemp > _maxTemp)
                             {
-                                Console.WriteLine($"Core temp reached {Convert.ToInt32(coreTemp)}.  Max temp allowed is 60.");
+                                Console.WriteLine($"Core temp reached {_coreTempInt}.  Max temp allowed is {_maxTemp}.");
                                 return true;
                             }
                             Console.WriteLine();
