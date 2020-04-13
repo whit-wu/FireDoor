@@ -21,7 +21,7 @@ namespace FireDoor.Services
         // qualifed path.  
         public TempWriterService()
         {
-            Environment.CurrentDirectory = "../..";
+            Environment.CurrentDirectory = "C:\\Temp";
             appDirectory = Environment.CurrentDirectory;
             currentDateTime = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
         }
