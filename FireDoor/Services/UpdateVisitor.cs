@@ -1,13 +1,15 @@
 ﻿using OpenHardwareMonitor.Hardware;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FireDoor.Services
 {
-
+    // The code below was pulled from OpenHardwareMonitor's
+    // main project.  It was used by the main project to 
+    // communiate with another project, called OpenHardwareMonitorLib,
+    // which was the portion of the app that pulled hardware data.
+    // Since the OpenHardwareMonitor DLL only includes the contents
+    // of OpenHardwareMonitorLib, we need to recreate the UpdateVisitor
+    // class in our project so we can pull down hardware data just as 
+    // OpenHardwareMonitor did.
     public class UpdateVisitor : IVisitor
     {
         public void VisitComputer(IComputer computer)
