@@ -46,14 +46,22 @@ namespace FireDoor.Services
             Console.WriteLine($"FireDoor is now running, and will terminate upon exit or when CPU reaches {maxTemp} degress Celcius.");
             while (!IsCPUTooHot())
             {
-                Process[] pname = Process.GetProcessesByName(proc.ProcessName);
-                if (pname.Length == 0)
+                try
                 {
-                    Console.Clear();
-                    writerService.ReadCoreData();
-                    appUpTime.Stop();
-                    return ("Process terminated by user", null, 0, appUpTime);
+                    Process[] pname = Process.GetProcessesByName(proc.ProcessName);
+                    if (pname.Length == 0)
+                    {
+                        Console.Clear();
+                        writerService.ReadCoreData();
+                        appUpTime.Stop();
+                        return ("Process terminated by user", null, 0, appUpTime);
+                    }
                 }
+                catch(Exception ex)
+                {
+                    return ("Process could not be found.  Are you using a launcher?", null, 0, appUpTime);
+                }
+
                 
                 // The original intention was to have this loop
                 // run once every second, but this causes some

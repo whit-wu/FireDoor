@@ -13,7 +13,7 @@ namespace FireDoor {
             CpuTempService cpuTempService = new CpuTempService(appToTest);
             var results = cpuTempService.MeasureTemperature();
 
-            Console.WriteLine($"Termination result: {results.termReason}.");
+            Console.WriteLine($"Termination result: {results.termReason}");
 
             if (results.coreName != null)
             {
