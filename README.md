@@ -54,5 +54,5 @@ This file specifies that OpenHardwareMonitorLib is bundled into any EXE generate
 
 <strong>My app has its own launcher.  How can I move forward with testing? </strong>
 
-At this time, apps with their own launchers are unable to be tested.  I am curretnly looking into a solution for this.
+At this time, apps with their own launchers are unable to be tested.  I am curretly looking into a solution for this.
 
