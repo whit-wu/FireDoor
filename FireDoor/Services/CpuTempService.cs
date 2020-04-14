@@ -19,7 +19,7 @@ namespace FireDoor.Services
 
         private TempWriterService writerService = new TempWriterService();
 
-        private Stopwatch appUpTime = new Stopwatch(); 
+        private Stopwatch appUpTime = new Stopwatch();
 
         public CpuTempService(ProcessStartInfo appToTest)
         {
@@ -138,7 +138,14 @@ namespace FireDoor.Services
         /// </summary>
         public void KillOCTestApp()
         {
-            proc.Kill();
+            foreach (var p in Process.GetProcessesByName(proc.ProcessName))
+            {
+                try
+                {
+                    p.Kill();
+                }
+                catch { }
+            }
         }
 
         /// <summary>
