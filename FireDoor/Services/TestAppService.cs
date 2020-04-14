@@ -33,7 +33,7 @@ namespace FireDoor.Services
                     if (hasLauncher)
                     {
                         Console.Clear();
-                        Console.WriteLine("It appears the game you wish to test requires a launcher to startup before running.");
+                        Console.WriteLine("It appears the game you wish to test uses a launcher from a digital games provider to startup before running.");
                         Console.WriteLine("Firedoor needs the test app to run before it can read your CPU temp.");
                         Console.WriteLine("To do this, your launcher must be running first.");
                         Console.WriteLine("Please sign into or startup your lancher now, then press enter once it is running.");
