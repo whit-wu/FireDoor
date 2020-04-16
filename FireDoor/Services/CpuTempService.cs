@@ -167,7 +167,6 @@ namespace FireDoor.Services
             do
             {
                 Console.WriteLine("Please enter the max temp (in C) that you are willing your CPU to reach while testing and hit enter.");
-                Console.WriteLine("Or press enter without entering a value to use the default max tem (60 degrees C).");
                 Console.Write("Max temp: ");
 
                 Key = Console.ReadLine();
