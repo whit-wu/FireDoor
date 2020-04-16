@@ -69,5 +69,5 @@ As I said earlier, FireDoor takes advantage of methods from a DLL, called OpenHa
 
 <strong>My app has its own launcher.  How can I move forward with testing? </strong>
 
-At this time, apps with their own launchers are unable to be tested.  I am curretly looking into a solution for this.
+At this time, apps with their own launchers are unable to be tested.  I am currently looking into a solution for this.
 
