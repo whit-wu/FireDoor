@@ -23,7 +23,7 @@ namespace FireDoor {
                 
             }
 
-            Console.WriteLine($"Total uptime {results.appRunTime.Elapsed.ToString(@"m\:ss\.fff")}");
+            Console.WriteLine($"Total uptime {results.appRunTime.Elapsed.ToString(@"hh\:mm\:ss\:fff")}");
 
             Console.ReadLine();
         }
