@@ -1,6 +1,6 @@
 # FireDoor
 ## Description
-Firedoor is an open source .NET Framework 4.8 application that allows users to measure the temperature of your CPU's cores without having to manually monitor them.
+Firedoor is an open source .NET Framework 4.8 application that allows users to measure the temperature of their CPU's cores without having to manually monitor them.
 It was created from a need to ensure that long-term heat would not damage the chip.  The user starts by specifying which resource-intensive application they plan to test.  The user will then have an opportunity to define the max temperature they are willing their CPU cores to reach.  The application specified will then start, and FireDoor will monitor the temperatures in the background.  If a core goes past the maximum temperature specified, FireDoor will exit the test app to help prevent long term heat damage from being done to the CPU.  It should be noted that FireDoor is NOT meant to overclock CPUs; it acts as supplemental software that allows users to safely test their overclocked settings.  FireDoor is able to pull CPU temps by using a library from another open source project, called OpenHardwareMonitor.  
  
 ## How To Use
