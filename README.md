@@ -30,7 +30,11 @@ Below is a screenshot of the results I get back from FireDoor if my max temp (45
 I would get a similar screen back if I exited the test app myself, with the only difference being that my Termination Result would say "Process terminated by user".
 
 ## Why Use FireDoor?
-You may be wondering what makes this app so special if you could simply use OpenHardwareMonitor to help you monitor CPU temps.  After all, FireDoor uses one of its libraries for the purpose of collecting CPU temps, so it must be a sturdy program.  Truth be told, OpenHardware monitor is a fantastic program, but when overclocking it is nice to have a tool that can do the following:    
+You may be wondering what makes this app so special if you could simply run a stress test against your hardware.  Truth be told, stress testing is great if your voltage is static, but if you are using adaptive voltage, your tests could make your CPU hotter than you would like it to be.  
+
+Another option would be to use a hardware-monitoring program so that you can see your CPU's temperatures.  The problem with this approach is that it forces you to monitor your temperatures manually, which is distracting and inconvenient.  
+
+FireDoor gives us a third option by allowing us to avoid the risks of stress testing while automating the monitoring process.  It accomplishes this by doing the following:
 
 - Runs in the background so that you can test without manually monitoring your CPU temps.    
 
@@ -38,7 +42,7 @@ You may be wondering what makes this app so special if you could simply use Open
 
 - Upon termination of the test program, displays the average temperatures of each core during testing.
 
-If you want a general overview of your hardware temps that you can monitor manaully, use OpenHardwareMonitor. However, if you are looking to find the "sweet spot" clock speed for your CPU that gives you the best performance without frying the chip, then FireDoor may be the best choice for you! 
+So if you feel stress testing is too risky and manual monitoring is too inconvenient, then FireDoor is the right option for you!
 
 ##  DLLs and Nuget Packages Used
 - OpenHardwareMonitorLib: A DLL of OpenHardwareMonitorLib has been included in this app.  It includes methods that allow the developer to 
