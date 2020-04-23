@@ -54,10 +54,6 @@ measure CPU temps.  Unfortunately, no Nuget package for this library was availab
 <strong>What is the app.manifest file for?</strong>
  
 The app.manifest file allows Visual Studio to run the code with admin privileges.  Without it, the app is unable to read the temperature of each core.
- 
-<strong>FireDoor sees more cores on my CPU than I am expecting.  What's the deal?</strong>
- 
-FireDoor uses a DLL from OpenHardwareMonitor to call libraries that will read the temperature of each logical core (the number of physical cores on your CPU times the amount of threads each core runs).  For example, let's say my CPU has two physical cores, and each core can run two threads.  OpenHardwareMonitor will seem them as four cores when reading CPU core temperatures on my PC.  
 
 <strong>Why is there one ten second delay before temps are collected after each second?</strong>
 
